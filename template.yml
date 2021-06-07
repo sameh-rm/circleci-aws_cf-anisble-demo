@@ -1,13 +1,8 @@
-Parameters:
-  LinuxAmiId:
-    Type: "String"
-    Default: "ami-0b59bfac6be064b78"
-
 Resources:
   Ec2Instance: 
     Type: AWS::EC2::Instance
     Properties: 
-      ImageId: !Ref LinuxAmiId
+      ImageId: ami-0b59bfac6be064b78
       KeyName: 
         Ref: "udacity"
       NetworkInterfaces: 
