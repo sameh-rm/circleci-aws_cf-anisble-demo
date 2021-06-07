@@ -1,4 +1,4 @@
-Paramaters:
+Parameters:
   LinuxAmiId:
     Type: "String"
     Default: "ami-0b59bfac6be064b78"
