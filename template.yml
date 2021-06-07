@@ -1,29 +1,24 @@
+AWSTemplateFormatVersion: 2010-09-09
 Resources:
-
-  InstanceSecurityGroup:
+  WebServerInstance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      ImageId: ami-0b59bfac6be064b78
+      InstanceType: t2.micro
+      SecurityGroups:
+        - !Ref WebServerSecurityGroup
+      KeyName: udacity
+      
+  WebServerSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
-      GroupDescription: Enable SSH access via port 22
-      VpcId: vpc-50ba303b
+      GroupDescription: Enable HTTP access via port 80
       SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+          CidrIp: 0.0.0.0/0
         - IpProtocol: tcp
           FromPort: '22'
           ToPort: '22'
           CidrIp: 0.0.0.0/0
-
-  MyEC2Instance: 
-    Type: AWS::EC2::Instance
-    DependsOn: InstanceSecurityGroup
-    Properties: 
-      ImageId: "ami-0b59bfac6be064b78"
-      KeyName: "udacity"
-      InstanceType: "t2.micro"
-      BlockDeviceMappings:
-        - DeviceName: "/dev/sda1"
-          Ebs:
-            DeleteOnTermination: true
-            VolumeSize: 8
-            VolumeType: "gp2"
-      SubnetId: subnet-bd3c6ff1
-      SecurityGroups:
-        - !Ref InstanceSecurityGroup
