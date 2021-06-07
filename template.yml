@@ -17,4 +17,13 @@ Resources:
     Properties: 
       ImageId: "ami-0b59bfac6be064b78"
       KeyName: "udacity"
-
+      InstanceType: "t2.micro"
+      BlockDeviceMappings:
+        - DeviceName: "/dev/sda1"
+          Ebs:
+            DeleteOnTermination: true
+            VolumeSize: 8
+            VolumeType: "gp2"
+      SubnetId: subnet-bd3c6ff1
+      SecurityGroups:
+        - !Ref InstanceSecurityGroup
