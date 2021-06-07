@@ -3,8 +3,7 @@ Resources:
     Type: AWS::EC2::Instance
     Properties: 
       ImageId: ami-0b59bfac6be064b78
-      KeyName: 
-        Ref: "udacity"
+      KeyName: "udacity"
       NetworkInterfaces: 
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
