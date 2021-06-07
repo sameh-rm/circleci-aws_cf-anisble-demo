@@ -10,6 +10,8 @@ Resources:
           GroupSet: 
             - Ref: "InstanceSecurityGroup"
           SubnetId: "subnet-bd3c6ff1"
+      DependsOn: InstanceSecurityGroup
+
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
