@@ -1,17 +1,27 @@
+Paramaters:
+  LinuxAmiId:
+    Type: "String"
+    Default: "ami-0b59bfac6be064b78"
+
 Resources:
-  Ec2Instance:
-    Type: "AWS::EC2::Instance"
-    Properties:
-      SecurityGroups:
-        - !Ref InstanceSecurityGroup
-      KeyName: udacity
-      ImageId: "ami-02dd09566c7a252b0" # you may need to find out what instance types are available in your region - use https://cloud-images.ubuntu.com/locator/ec2/
+  Ec2Instance: 
+    Type: AWS::EC2::Instance
+    Properties: 
+      ImageId: !Ref LinuxAmiId
+      KeyName: 
+        Ref: "udacity"
+      NetworkInterfaces: 
+        - AssociatePublicIpAddress: "true"
+          DeviceIndex: "0"
+          GroupSet: 
+            - Ref: "InstanceSecurityGroup"
+          SubnetId: "subnet-bd3c6ff1"
   InstanceSecurityGroup:
-    Type: "AWS::EC2::SecurityGroup"
+    Type: 'AWS::EC2::SecurityGroup'
     Properties:
       GroupDescription: Enable SSH access via port 22
       SecurityGroupIngress:
         - IpProtocol: tcp
-          FromPort: "22"
-          ToPort: "22"
+          FromPort: '22'
+          ToPort: '22'
           CidrIp: 0.0.0.0/0
