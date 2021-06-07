@@ -6,10 +6,12 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
-      - run: |
-        aws cloudformation deploy \
-        --template-file template.yml \
-        --stack-name my-stack
+      - run:
+          name: "create infra"
+          command: |
+            aws cloudformation deploy \
+            --template-file template.yml \
+            --stack-name my-stack
 
 workflows:
   my_workflow:
