@@ -6,7 +6,7 @@ commands:
           name: Destroy Environment
           command: |
             aws cloudfromation delete-stack --stack-name prod-${CIRCLE_WORKFLOW_ID}
-
+          when: on_fail
 jobs:
   smoke_test:
     docker:
@@ -17,11 +17,8 @@ jobs:
           name: simulate error
           command: |
             return 1
-      - run:
-          name: Destroy Environment
-          command: |
-            aws cloudformation delete-stack --stack-name prod-${CIRCLE_WORKFLOW_ID}
-          when: on_fail
+      - destroy_environment
+
 
   create_infrastructure:
     docker:
