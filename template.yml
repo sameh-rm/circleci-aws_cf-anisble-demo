@@ -8,7 +8,6 @@ Resources:
       SecurityGroups:
         - !Ref WebServerSecurityGroup
       KeyName: udacity
-      
   WebServerSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
