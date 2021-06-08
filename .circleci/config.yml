@@ -9,16 +9,19 @@ commands:
 
 jobs:
   smoke_test:
-      docker:
-        - image: amazon/aws-cli
-      steps:
-        - run: apk add --update curl
-        - run:
-            name: simulate error
-            command: |
-              return 1
-        - destroy_environment
-            when: on_fail
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run:
+          name: simulate error
+          command: |
+            return 1
+      - run:
+          name: Destroy Environment
+          command: |
+            aws cloudfromation delete-stack --stack-name prod-${CIRCLECI_WORKFLOW_ID}
+          when: on_fail
 
   create_infrastructure:
     docker:
@@ -38,4 +41,4 @@ workflows:
       - create_infrastructure
       - smoke_test:
           requires:
-            - configure_infrastructure
+            - create_infrastructure
