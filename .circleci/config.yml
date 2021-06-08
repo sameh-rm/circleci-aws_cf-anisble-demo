@@ -5,7 +5,7 @@ commands:
       - run:
           name: Destroy Environment
           command: |
-            aws cloudfromation delete-stack --stack-name prod-${CIRCLECI_WORKFLOW_ID}
+            aws cloudfromation delete-stack --stack-name prod-${CIRCLE_WORKFLOW_ID}
 
 jobs:
   smoke_test:
@@ -20,7 +20,7 @@ jobs:
       - run:
           name: Destroy Environment
           command: |
-            aws cloudfromation delete-stack --stack-name prod-${CIRCLECI_WORKFLOW_ID}
+            aws cloudformation delete-stack --stack-name prod-${CIRCLE_WORKFLOW_ID}
           when: on_fail
 
   create_infrastructure:
